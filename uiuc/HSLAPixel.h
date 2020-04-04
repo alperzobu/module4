@@ -15,7 +15,7 @@ namespace uiuc {
   // Put your HSLAPixel class definition here.
   // (Remember to end it with a semicolon!)
   class HSLAPixel{
-    private:
+    public:
       double h,s,l,a;
 
   };

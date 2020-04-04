@@ -70,10 +70,13 @@ PNG createSpotlight(PNG image, int centerX, int centerY) {
   for (unsigned x = 0; x < image.width(); x++) {
     for (unsigned y = 0; y < image.height(); y++) {
       HSLAPixel & pixel = image.getPixel(x, y);
-      int value = int(sqrt(pow(centerX-x,2)+pow(centerY-y,2)));
+      int value = sqrt((centerX-x)*(centerX-x) +(centerY-y)*(centerY-y));
       // `pixel` is a reference to the memory stored inside of the PNG `image`,
       // which means you're changing the image directly. No need to `set`
       // the pixel since you're directly changing the memory of the image.
+      if(value>160)
+        value =160;
+
       pixel.l = (pixel.l *(100-double(value)/2))/100;
     }
   }
@@ -96,7 +99,7 @@ PNG illinify(PNG image) {
   for (unsigned x = 0; x < image.width(); x++) {
     for (unsigned y = 0; y < image.height(); y++) {
       HSLAPixel & pixel = image.getPixel(x, y);
-      if(pixel.h>113.5){
+      if(pixel.h>113 && pixel.h<294){
         pixel.h = 216;
       }else{
         pixel.h = 11;
